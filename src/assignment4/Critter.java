@@ -51,6 +51,25 @@ public abstract class Critter {
 	private int y_coord;
 	
 	protected final void walk(int direction) {
+		switch(direction) {
+		case 0: x_coord++;
+				break;
+		case 1: x_coord++; y_coord--;
+				break;
+		case 2: y_coord--;
+				break;
+		case 3: x_coord--; y_coord--;
+				break;
+		case 4: x_coord--;
+				break;
+		case 5: x_coord--; y_coord++;
+				break;
+		case 6: y_coord++;
+				break;
+		case 7: x_coord++; y_coord++;
+				break;
+		default: break;		
+		}
 	}
 	
 	protected final void run(int direction) {
@@ -58,6 +77,30 @@ public abstract class Critter {
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
+		if(energy >= Params.min_reproduce_energy) {
+		offspring.energy = energy/2;
+		energy-=energy/2;
+		switch(direction) {
+		case 0:offspring.x_coord = x_coord + 1;
+		break;
+case 1: offspring.x_coord = x_coord + 1;offspring.y_coord= y_coord - 1;
+		break;
+case 2: offspring.y_coord = y_coord - 1;
+		break;
+case 3: offspring.x_coord = x_coord -1 ;offspring.y_coord= y_coord - 1;
+		break;
+case 4: offspring.x_coord = x_coord - 1;
+		break;
+case 5: offspring.x_coord = x_coord - 1;offspring.y_coord= y_coord + 1;
+		break;
+case 6: offspring.y_coord = y_coord + 1;
+		break;
+case 7: offspring.x_coord =x_coord + 1;offspring.y_coord = y_coord + 1;
+		break;
+default: break;	
+		}
+		
+		}
 	}
 
 	public abstract void doTimeStep();
