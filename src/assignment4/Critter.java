@@ -73,7 +73,30 @@ public abstract class Critter {
 	}
 	
 	protected final void run(int direction) {
-		
+		switch(direction)
+		{
+		case 0: x_coord += 2;
+				break;
+		case 1: x_coord += 2;
+				y_coord -= 2;
+				break;
+		case 2: y_coord -= 2;
+				break;
+		case 3: x_coord -= 2;
+				y_coord -= 2;
+				break;
+		case 4: x_coord -= 2;
+				break;
+		case 5: x_coord -= 2;
+				y_coord += 2;
+				break;
+		case 6: y_coord += 2;
+				break;
+		case 7: x_coord += 2;
+				y_coord += 2;
+				break;
+		default:break;
+		}
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
@@ -211,14 +234,25 @@ default: break;
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		// Complete this method.
+		population.clear();
+		babies.clear();
 	}
 	
 	public static void worldTimeStep() {
-		// Complete this method.
+		for(Critter c : population) {
+			c.doTimeStep();
+		}
+		population.addAll(babies);
+		for(Critter c : population) {
+			c.energy-=Params.rest_energy_cost;
+			if(c.energy <= 0) {
+				population.remove(c);
+			}
+		}
+		
 	}
 	
 	public static void displayWorld() {
-		// Complete this method.
+		
 	}
 }
